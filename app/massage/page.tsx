@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Image from "next/image";
 import { treatments } from "@/data/treatments";
 import { audiences, audienceDisclaimer } from "@/data/audiences";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { CtaBand } from "@/components/ui/CtaBand";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Le massage — classique & réflexologie",
   description:
     "Massage classique (pétrissage, glissements, points de pression) et réflexologie plantaire et palmaire à Lonay. Pour sportifs, adolescents, adultes et seniors.",
-  alternates: { canonical: "/massage" },
-};
+  path: "/massage",
+});
 
 export default function MassagePage() {
   return (

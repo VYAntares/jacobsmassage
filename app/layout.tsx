@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/navigation/SiteFooter";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { business, siteUrl } from "@/data/business";
+import { ogImage } from "@/lib/metadata";
 
 const inter = localFont({
   src: [
@@ -33,9 +34,15 @@ export const metadata: Metadata = {
     title: "Jacob's Massage — Massothérapeute à Lonay",
     description:
       "Massage classique et réflexologie dans un cabinet simple et chaleureux à Lonay, proche de Morges.",
-    images: [{ url: "/images/massage-dos.jpg", width: 1065, height: 1600, alt: "Massage du dos en cabinet" }],
+    url: "/",
+    images: [ogImage],
   },
-  twitter: { card: "summary_large_image" },
+  twitter: {
+    card: "summary_large_image",
+    title: "Jacob's Massage — Massothérapeute à Lonay",
+    description: "Massage classique et réflexologie à Lonay, proche de Morges. 079 450 84 96.",
+    images: [ogImage.url],
+  },
   formatDetection: { telephone: true },
 };
 

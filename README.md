@@ -7,11 +7,51 @@ Next.js à partir de la maquette validée « Main & colonne » (Claude /design).
 
 ```bash
 npm install
-npm run dev      # http://localhost:3000
-npm run build && npm start
+npm run dev        # développement : http://localhost:3000
+npm run preview    # build + test local dans le runtime Cloudflare : http://localhost:8787
 ```
 
-Prêt pour Vercel (aucune configuration nécessaire).
+Le site est exporté en **statique** (`out/`) et servi par Cloudflare. Seul le
+formulaire de contact exécute du code (`worker/index.ts`).
+
+## Déployer sur Cloudflare
+
+### Option A — Cloudflare Workers (recommandé)
+
+1. Cloudflare → **Workers & Pages** → **Create** → **Import a repository** → ce dépôt, branche `main`.
+2. Réglages de build :
+   - **Build command** : `npm run build`
+   - **Deploy command** : `npx wrangler deploy`
+   - Variable de build (facultatif) : `NEXT_PUBLIC_SITE_URL=https://www.jacobsmassage.ch`
+3. Après le premier déploiement : **Settings → Domains & Routes** → ajouter `jacobsmassage.ch` et `www.jacobsmassage.ch`.
+4. Formulaire (facultatif) : **Settings → Variables and Secrets**
+   - `RESEND_API_KEY` (type *Secret*)
+   - `CONTACT_TO_EMAIL` (adresse qui reçoit les messages)
+   - `CONTACT_FROM_EMAIL` (ex. `Jacob's Massage <site@jacobsmassage.ch>`, domaine vérifié chez Resend)
+
+Ou en ligne de commande : `npx wrangler login` puis `npm run deploy`.
+
+### Option B — Cloudflare Pages
+
+**Create → Pages → Connect to Git** → *Framework preset* : **None**,
+*Build command* : `npm run build`, *Build output directory* : `out`.
+Le formulaire est alors géré par `functions/api/contact.ts` (mêmes variables).
+
+### Image de partage (WhatsApp, Instagram, Facebook, LinkedIn, X, iMessage…)
+
+`public/og-image.jpg` (1200 × 630, 68 Ko) est déclarée sur toutes les pages
+(Open Graph + Twitter Card). Les aperçus utilisent l'URL absolue construite
+avec `NEXT_PUBLIC_SITE_URL` : ils fonctionnent dès que le domaine pointe vers
+Cloudflare. Pour rafraîchir le cache après la mise en ligne :
+[Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/)
+(sert aussi pour WhatsApp et Instagram) et
+[LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/).
+
+### Images
+
+Les photos sont servies en WebP responsive pré-générés (`public/images/opt/`).
+Après avoir ajouté ou remplacé une photo dans `public/images/` :
+`npm run images` (Python + Pillow).
 
 ## Pages
 
@@ -36,16 +76,9 @@ site actuel : à confirmer par Elie Berthet avant la mise en ligne.
 
 ## Formulaire de contact
 
-`/api/contact` envoie les messages via [Resend](https://resend.com) si ces
-variables sont définies (voir `.env.example`) :
-
-```
-RESEND_API_KEY=...
-CONTACT_TO_EMAIL=...
-CONTACT_FROM_EMAIL="Jacob's Massage <site@domaine-verifie.ch>"
-```
-
-Sans elles, le formulaire indique clairement que le message **n'a pas été
+`/api/contact` (Worker Cloudflare) envoie les messages via [Resend](https://resend.com)
+si `RESEND_API_KEY` et `CONTACT_TO_EMAIL` sont définies dans Cloudflare
+(en local : fichier `.dev.vars`, voir `.env.example`). Sans elles, le formulaire indique clairement que le message **n'a pas été
 envoyé** et renvoie vers le téléphone. Les rendez-vous se prennent par
 téléphone (liens `tel:` partout).
 

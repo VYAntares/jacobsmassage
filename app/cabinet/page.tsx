@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Image from "next/image";
 import Link from "next/link";
 import { cabinetGallery, cabinetSpaces, consultationSteps, firstSession } from "@/data/cabinet";
@@ -9,12 +10,12 @@ import { CtaBand } from "@/components/ui/CtaBand";
 import { BookingButton } from "@/components/ui/BookingButton";
 import { spaceIcons } from "@/components/ui/Icons";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Le cabinet",
   description:
     "Le cabinet Jacob's Massage à Lonay : une salle de soin lumineuse, une salle de bain et un espace pour discuter. Découvrez Elie Berthet et le déroulement d'une séance.",
-  alternates: { canonical: "/cabinet" },
-};
+  path: "/cabinet",
+});
 
 export default function CabinetPage() {
   return (

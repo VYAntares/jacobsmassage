@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "wrangler dev",
+    "images": "python3 scripts/optimize-images.py",
+    "preview": "next build && wrangler dev",
+    "deploy": "next build && wrangler deploy"
   },
   "dependencies": {
     "gsap": "^3.13.0",
@@ -20,6 +23,10 @@
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",
     "tailwindcss": "^4.1.13",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "wrangler": "^4.152.0"
+  },
+  "engines": {
+    "node": ">=20.9"
   }
 }

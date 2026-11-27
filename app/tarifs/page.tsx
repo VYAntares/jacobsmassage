@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Image from "next/image";
 import { business } from "@/data/business";
 import { prices, goodToKnow } from "@/data/prices";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { CashIcon } from "@/components/ui/Icons";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Tarifs",
   description:
     "Tarifs du massage à Lonay : 70 CHF la séance d'une heure pour les adultes, 1.– CHF la minute pour les étudiants. Paiement en espèces.",
-  alternates: { canonical: "/tarifs" },
-};
+  path: "/tarifs",
+});
 
 export default function TarifsPage() {
   return (

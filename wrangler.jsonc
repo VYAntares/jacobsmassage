@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "jacobsmassage",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-10-20",
+  "assets": {
+    "directory": "./out",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*"]
+  },
+  "observability": { "enabled": true },
+  // Variables (CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL) and the secret
+  // RESEND_API_KEY are set in the Cloudflare dashboard and kept across deploys.
+  "keep_vars": true
+}

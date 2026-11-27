@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { business } from "@/data/business";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { PhoneIcon, PinIcon, ClockIcon, ArrowIcon } from "@/components/ui/Icons";
 import { ContactForm } from "@/components/ui/ContactForm";
 import { MapEmbed } from "@/components/ui/MapEmbed";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact & rendez-vous",
   description:
     "Prendre rendez-vous chez Jacob's Massage à Lonay : 079 450 84 96, du lundi au dimanche. Chemin des Abbesses 29, 1027 Lonay.",
-  alternates: { canonical: "/contact" },
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (
