@@ -16,7 +16,22 @@ formulaire de contact exécute du code (`worker/index.ts`).
 
 ## Déployer sur Cloudflare
 
-### Option A — Cloudflare Workers (recommandé)
+### Option 0 — Déploiement automatique via GitHub Actions (le plus simple)
+
+Chaque push sur `main` build et déploie le site sur Cloudflare
+(`.github/workflows/deploy.yml`). Il suffit d'ajouter une fois, dans GitHub →
+**Settings → Secrets and variables → Actions** :
+
+- `CLOUDFLARE_ACCOUNT_ID` : Cloudflare → Workers & Pages → colonne de droite « Account ID »
+- `CLOUDFLARE_API_TOKEN` : Cloudflare → My Profile → API Tokens → Create Token →
+  modèle **« Edit Cloudflare Workers »**
+
+Puis GitHub → **Actions → Deploy to Cloudflare → Run workflow**. Le site est
+publié sur `https://jacobsmassage.<votre-sous-domaine>.workers.dev` ; ajoutez
+ensuite le domaine dans Cloudflare → le Worker `jacobsmassage` → Settings →
+Domains & Routes.
+
+### Option A — Cloudflare Workers (connexion Git depuis le dashboard)
 
 1. Cloudflare → **Workers & Pages** → **Create** → **Import a repository** → ce dépôt, branche `main`.
 2. Réglages de build :
