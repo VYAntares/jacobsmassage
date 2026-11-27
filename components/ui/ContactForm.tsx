@@ -137,8 +137,8 @@ export function ContactForm() {
             aria-describedby={errors.consent ? "e-consent" : undefined}
           />
           <span>
-            J&apos;accepte que mes données soient utilisées uniquement pour répondre à ma demande. Elles ne sont ni
-            partagées ni utilisées à d&apos;autres fins.
+            J&apos;accepte que mes données soient utilisées uniquement pour répondre à ma demande (voir la{" "}
+            <a href="/confidentialite" target="_blank" rel="noopener">politique de confidentialité</a>).
           </span>
         </label>
         {errors.consent && <span id="e-consent" className="field__error">{errors.consent}</span>}

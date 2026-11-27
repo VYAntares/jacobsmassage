@@ -38,6 +38,6 @@ export const priceSummary = {
 export const goodToKnow = [
   { label: "Durée d'une consultation", value: "60 à 90 min" },
   { label: "Première séance", value: "Anamnèse incluse" },
-  { label: "Moyen de paiement", value: "Espèces uniquement" },
+  { label: "Moyen de paiement", value: "Espèces ou TWINT" },
   { label: "Remboursement assurance", value: "Non" },
 ] as const;

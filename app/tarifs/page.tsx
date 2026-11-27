@@ -9,7 +9,7 @@ import { CashIcon } from "@/components/ui/Icons";
 export const metadata: Metadata = pageMetadata({
   title: "Tarifs",
   description:
-    "Tarifs du massage à Lonay : 70 CHF la séance d'une heure pour les adultes, 1.– CHF la minute pour les étudiants. Paiement en espèces.",
+    "Tarifs du massage à Lonay : 70 CHF la séance d'une heure pour les adultes, 1.– CHF la minute pour les étudiants. Paiement en espèces ou par TWINT.",
   path: "/tarifs",
 });
 

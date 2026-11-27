@@ -55,6 +55,20 @@ export function SiteFooter() {
           <span>© {year} {business.name} · {business.address.city}, {business.address.nearby}</span>
           <span>{business.payment.sentence}</span>
         </div>
+        <div
+          style={{
+            display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 12,
+            marginTop: -32, fontSize: 14, color: "var(--nuit-muted)",
+          }}
+        >
+          <nav aria-label="Informations légales" className="footer-legal">
+            <Link href="/mentions-legales">Mentions légales</Link>
+            <Link href="/confidentialite">Confidentialité</Link>
+          </nav>
+          <a href={business.credit.href} target="_blank" rel="noopener" className="footer-credit">
+            Réalisation : {business.credit.label}
+          </a>
+        </div>
       </div>
     </footer>
   );

@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { navigation } from "@/data/navigation";
 import { business } from "@/data/business";
 import { Brand } from "@/components/ui/Brand";
@@ -18,24 +19,34 @@ export function MobileMenu({ open, onClose, pathname }: { open: boolean; onClose
   const closeBtn = useRef<HTMLButtonElement>(null);
   const lenis = useLenis();
   const wasOpen = useRef(false);
+  // Rendered in a portal on <body>: an ancestor with backdrop-filter (the
+  // sticky header) would otherwise trap this fixed panel inside the header
+  // box on iOS Safari.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     const el = panel.current;
     if (!el) return;
+    el.classList.toggle("is-open", open);
     if (open) {
       wasOpen.current = true;
       openMenu(el);
       lenis?.stop();
-      document.body.style.overflow = "hidden";
-      closeBtn.current?.focus();
+      document.documentElement.classList.add("menu-open");
+      // Wait one frame so the panel is visible before moving focus into it.
+      window.setTimeout(() => closeBtn.current?.focus({ preventScroll: true }), 60);
     } else if (wasOpen.current) {
       wasOpen.current = false;
       closeMenu(el);
       lenis?.start();
-      document.body.style.overflow = "";
+      document.documentElement.classList.remove("menu-open");
       document.querySelector<HTMLButtonElement>(".menu-btn")?.focus({ preventScroll: true });
     }
-  }, [open, lenis]);
+  }, [open, lenis, mounted]);
+
+  // Safety: never leave the page locked if the menu unmounts while open.
+  useEffect(() => () => document.documentElement.classList.remove("menu-open"), []);
 
   // Escape + focus trap
   useEffect(() => {
@@ -66,7 +77,9 @@ export function MobileMenu({ open, onClose, pathname }: { open: boolean; onClose
     return () => mq.removeEventListener("change", onChange);
   }, [onClose]);
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <div
       id="mobile-menu"
       ref={panel}
@@ -113,6 +126,7 @@ export function MobileMenu({ open, onClose, pathname }: { open: boolean; onClose
           {business.hours.sentence}
         </p>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

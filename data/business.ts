@@ -45,9 +45,18 @@ export const business = {
     schema: "Mo-Su 11:00-20:00",
   },
   payment: {
-    short: "Espèces uniquement",
-    sentence: "Paiement en espèces uniquement",
+    short: "Espèces ou TWINT",
+    sentence: "Paiement en espèces ou par TWINT",
   },
+  /** Legal pages (Swiss sole trader — impressum + nLPD privacy notice). */
+  legal: {
+    owner: "Elie Berthet",
+    form: "Entreprise individuelle",
+    /** Add the UID (CHE-xxx.xxx.xxx) here only if the business is registered. */
+    uid: null as string | null,
+    updated: "27 novembre 2026",
+  },
+  credit: { label: "hiboot.ch", href: "https://hiboot.ch" },
   /** Only enable once the number is confirmed to be used on WhatsApp. */
   whatsapp: null as string | null,
   /** Real social profiles only. */

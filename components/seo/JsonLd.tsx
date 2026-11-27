@@ -12,7 +12,7 @@ export function JsonLd() {
     logo: `${siteUrl}/images/logo.png`,
     telephone: business.phone.e164,
     priceRange: "CHF",
-    paymentAccepted: "Cash",
+    paymentAccepted: "Cash, TWINT",
     address: {
       "@type": "PostalAddress",
       streetAddress: business.address.street,

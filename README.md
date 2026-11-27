@@ -62,6 +62,7 @@ Après avoir ajouté ou remplacé une photo dans `public/images/` :
 | `/massage`  | Le massage           |
 | `/tarifs`   | Tarifs               |
 | `/contact`  | Contact (carte Google Maps chargée au clic, formulaire fonctionnel) |
+| `/mentions-legales`, `/confidentialite` | Pages légales (impressum + nLPD), données dans `data/business.ts` → `legal` |
 
 ## Modifier le contenu
 
