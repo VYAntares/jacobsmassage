@@ -7,7 +7,6 @@ import { business } from "@/data/business";
 import { Brand } from "@/components/ui/Brand";
 import { CloseIcon, PhoneIcon } from "@/components/ui/Icons";
 import { Dots } from "@/components/ui/Dots";
-import { openMenu, closeMenu } from "@/animations/menuAnimations";
 import { useLenis } from "@/components/motion/SmoothScroll";
 
 function isActive(pathname: string, href: string) {
@@ -31,14 +30,12 @@ export function MobileMenu({ open, onClose, pathname }: { open: boolean; onClose
     el.classList.toggle("is-open", open);
     if (open) {
       wasOpen.current = true;
-      openMenu(el);
       lenis?.stop();
       document.documentElement.classList.add("menu-open");
       // Wait one frame so the panel is visible before moving focus into it.
       window.setTimeout(() => closeBtn.current?.focus({ preventScroll: true }), 60);
     } else if (wasOpen.current) {
       wasOpen.current = false;
-      closeMenu(el);
       lenis?.start();
       document.documentElement.classList.remove("menu-open");
       document.querySelector<HTMLButtonElement>(".menu-btn")?.focus({ preventScroll: true });
@@ -99,7 +96,7 @@ export function MobileMenu({ open, onClose, pathname }: { open: boolean; onClose
       <div className="mobile-menu__body">
         <ul className="mobile-menu__list">
           {navigation.map((item, i) => (
-            <li key={item.href} data-menu-item>
+            <li key={item.href} data-menu-item style={{ "--i": i } as React.CSSProperties}>
               <Link
                 href={item.href}
                 className="mobile-menu__link"
@@ -112,9 +109,11 @@ export function MobileMenu({ open, onClose, pathname }: { open: boolean; onClose
             </li>
           ))}
         </ul>
-        <Dots sizes={[8, 12, 16, 20, 16, 12, 8]} gap={10} style={{ paddingTop: 20 }} />
+        <div data-menu-item style={{ "--i": 2 } as React.CSSProperties}>
+          <Dots sizes={[8, 12, 16, 20, 16, 12, 8]} gap={10} style={{ paddingTop: 20 }} />
+        </div>
       </div>
-      <div className="mobile-menu__foot" data-menu-item>
+      <div className="mobile-menu__foot" data-menu-item style={{ "--i": navigation.length } as React.CSSProperties}>
         <a href={business.phone.href} className="btn btn--dark" style={{ fontSize: 18, padding: "18px 26px" }}>
           <PhoneIcon /> Prendre rendez-vous
         </a>

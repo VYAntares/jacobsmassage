@@ -183,13 +183,25 @@ p { margin: 0; }
   background: var(--brume);
   display: flex; flex-direction: column;
   overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
-  visibility: hidden; opacity: 0; pointer-events: none;
-  transition: opacity 0.25s ease, visibility 0s linear 0.25s;
   padding-bottom: env(safe-area-inset-bottom);
+  /* Opaque curtain dropping from the top — never see-through. */
+  visibility: hidden; pointer-events: none;
+  -webkit-clip-path: inset(0 0 100% 0); clip-path: inset(0 0 100% 0);
+  transition: clip-path 0.42s cubic-bezier(0.7, 0, 0.3, 1), -webkit-clip-path 0.42s cubic-bezier(0.7, 0, 0.3, 1), visibility 0s linear 0.42s;
 }
 .mobile-menu.is-open {
-  visibility: visible; opacity: 1; pointer-events: auto;
-  transition: opacity 0.25s ease, visibility 0s;
+  visibility: visible; pointer-events: auto;
+  -webkit-clip-path: inset(0 0 0 0); clip-path: inset(0 0 0 0);
+  transition: clip-path 0.5s cubic-bezier(0.7, 0, 0.3, 1), -webkit-clip-path 0.5s cubic-bezier(0.7, 0, 0.3, 1), visibility 0s;
+}
+.mobile-menu [data-menu-item] {
+  opacity: 0; transform: translateY(14px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.mobile-menu.is-open [data-menu-item] {
+  opacity: 1; transform: none;
+  transition: opacity 0.4s ease, transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(0.28s + var(--i, 0) * 0.04s);
 }
 html.menu-open, html.menu-open body { overflow: hidden; }
 @media (min-width: 961px) { .mobile-menu { display: none; } }
