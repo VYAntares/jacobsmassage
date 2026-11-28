@@ -10,6 +10,9 @@
 /images/*
   Cache-Control: public, max-age=2592000, stale-while-revalidate=31536000
 
+/videos/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=31536000
+
 /icon.png
   Cache-Control: public, max-age=604800, stale-while-revalidate=31536000
 

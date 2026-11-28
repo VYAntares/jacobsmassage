@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { preload } from "react-dom";
 import { business } from "@/data/business";
 import { audiences } from "@/data/audiences";
 import { treatmentTeasers } from "@/data/treatments";
@@ -9,61 +10,43 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Dots } from "@/components/ui/Dots";
 import { BookingButton } from "@/components/ui/BookingButton";
 import { CtaBand } from "@/components/ui/CtaBand";
+import { HeroVideo } from "@/components/ui/HeroVideo";
 
 export default function HomePage() {
+  preload("/videos/hero-poster.webp", { as: "image", fetchPriority: "high" });
   return (
     <>
-      {/* ── Hero */}
-      <section className="bg-brume" data-hero>
-        <div className="wrap hero__inner">
-          <div className="stack min0" style={{ flex: "1 1 460px", gap: 28 }}>
-            <Eyebrow dot data-hero-item>
-              Massothérapie à {business.address.city}, {business.address.nearby}
-            </Eyebrow>
-            <h1 className="h-display" data-hero-item>
-              Relâcher le corps, apaiser l&apos;esprit.
-            </h1>
-            <p className="lead" style={{ maxWidth: 520 }} data-hero-item>
+      {/* ── Hero (vidéo plein écran) */}
+      <section className="hero-video" data-hero>
+        <HeroVideo />
+        <div className="hero-video__veil" aria-hidden="true" />
+        <div className="wrap hero-video__inner">
+          <Dots breath sizes={[10, 14, 10]} gap={8} className="hero-video__dots" />
+          <p className="hero-video__eyebrow" data-hero-item>
+            Massothérapie à {business.address.city}, {business.address.nearby}
+          </p>
+          <h1 className="h-display hero-video__title" data-hero-item>
+            Relâcher le corps, apaiser l&apos;esprit.
+          </h1>
+          <div className="hero-video__bottom">
+            <p className="hero-video__lead" data-hero-item>
               Massage classique et réflexologie dans un cabinet simple et chaleureux. Chaque séance est unique, adaptée
               à votre corps et à votre rythme par {practitioner.name}, massothérapeute.
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }} data-hero-item>
-              <BookingButton />
-              <Link href="/massage" className="btn btn--outline">
+              <BookingButton variant="light" />
+              <Link href="/massage" className="btn btn--ghost-light">
                 Découvrir le massage
               </Link>
             </div>
-            <div className="facts" data-hero-item>
-              <div><span>Disponibilités</span><strong>{business.hours.short}</strong></div>
-              <div>
-                <span>Cabinet</span>
-                <strong>{business.address.streetShort}, {business.address.city}</strong>
-              </div>
-              <div><span>{priceSummary.sessionLabel}</span><strong>{priceSummary.session}</strong></div>
-            </div>
           </div>
-
-          <div className="min0" style={{ flex: "1 1 440px", position: "relative", display: "flex", gap: 20, alignItems: "stretch" }}>
-            <Dots breath className="hero-dots" style={{ justifyContent: "space-between", padding: "24px 0" }} />
-            <div style={{ flex: 1, position: "relative" }}>
-              <div className="media palm-bl hero__img" data-hero-media>
-                <Image
-                  src="/images/massage-dos.jpg"
-                  alt="Massage du dos en cabinet"
-                  fill
-                  priority
-                  fetchPriority="high"
-                  sizes="(max-width: 960px) 100vw, 560px"
-                  data-parallax="4"
-                />
-              </div>
-              <div className="float-card" data-hero-item>
-                <strong style={{ fontWeight: 600, fontSize: 18 }}>Première séance</strong>
-                <span style={{ fontSize: 14, color: "var(--texte-2)", lineHeight: 1.45 }}>
-                  Un temps d&apos;écoute pour l&apos;anamnèse et votre dossier personnel.
-                </span>
-              </div>
+          <div className="facts facts--light" data-hero-item>
+            <div><span>Disponibilités</span><strong>{business.hours.short}</strong></div>
+            <div>
+              <span>Cabinet</span>
+              <strong>{business.address.streetShort}, {business.address.city}</strong>
             </div>
+            <div><span>{priceSummary.sessionLabel}</span><strong>{priceSummary.session}</strong></div>
           </div>
         </div>
       </section>
