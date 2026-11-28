@@ -41,7 +41,7 @@ export default function MassagePage() {
         const img = (
           <div className="min0" style={{ flex: "1 1 440px" }}>
             <div className={`media feature-img ${t.corner === "bl" ? "palm-bl" : "palm-tr"}`} data-mask>
-              <Image src={t.image} alt={t.alt} fill sizes="(max-width: 960px) 100vw, 580px" data-parallax="4" />
+              <Image loading="eager" fetchPriority="low" src={t.image} alt={t.alt} fill sizes="(max-width: 960px) 100vw, 580px" data-parallax="4" />
             </div>
           </div>
         );
@@ -84,7 +84,7 @@ export default function MassagePage() {
             {audiences.map((a) => (
               <article key={a.id} id={a.id} className="anchor audience-card" data-reveal style={{ background: "var(--blanc)", borderRadius: 28, overflow: "hidden", display: "flex", flexDirection: "column" }}>
                 <div className="media" style={{ height: 260 }}>
-                  <Image src={a.image} alt={a.alt} fill sizes="(max-width: 1100px) 100vw, 600px" />
+                  <Image loading="eager" fetchPriority="low" src={a.image} alt={a.alt} fill sizes="(max-width: 1100px) 100vw, 600px" />
                 </div>
                 <div className="stack" style={{ padding: 32, gap: 12 }}>
                   <h3 style={{ margin: 0, fontWeight: 600, fontSize: 28 }}>{a.name}</h3>

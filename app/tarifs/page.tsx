@@ -76,7 +76,7 @@ export default function TarifsPage() {
       <section className="wrap section split">
         <div className="min0" style={{ flex: "1 1 440px" }}>
           <div className="media palm-br pricing-img" data-mask>
-            <Image src="/images/pierres-dos.jpg" alt="Pierres posées sur le dos pendant un soin" fill sizes="(max-width: 960px) 100vw, 580px" data-parallax="4" />
+            <Image loading="eager" fetchPriority="low" src="/images/pierres-dos.jpg" alt="Pierres posées sur le dos pendant un soin" fill sizes="(max-width: 960px) 100vw, 580px" data-parallax="4" />
           </div>
         </div>
         <div className="stack min0" style={{ flex: "1 1 440px" }}>

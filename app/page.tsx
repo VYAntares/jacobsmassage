@@ -52,6 +52,7 @@ export default function HomePage() {
                   alt="Massage du dos en cabinet"
                   fill
                   priority
+                  fetchPriority="high"
                   sizes="(max-width: 960px) 100vw, 560px"
                   data-parallax="4"
                 />
@@ -82,7 +83,7 @@ export default function HomePage() {
           {audiences.map((a, i) => (
             <Link key={a.id} href={`/massage#${a.id}`} className="card-link" data-reveal data-reveal-delay={i * 0.06}>
               <div className="media" style={{ borderRadius: 20, height: 300 }}>
-                <Image src={a.image} alt="" fill sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 300px" />
+                <Image loading="eager" fetchPriority="low" src={a.image} alt="" fill sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 300px" />
               </div>
               <strong style={{ fontSize: 24, fontWeight: 600, letterSpacing: "-0.02em" }}>{a.name}</strong>
               <span style={{ fontSize: 15, color: "var(--texte-2)", lineHeight: 1.5 }}>{a.summary}</span>
@@ -96,7 +97,7 @@ export default function HomePage() {
         <div className="wrap section split">
           <div className="min0" style={{ flex: "1 1 420px" }}>
             <div className="media palm-tl tall-img" data-mask>
-              <Image
+              <Image loading="eager" fetchPriority="low"
                 src="/images/preparation-table.jpg"
                 alt="Préparation de la table de massage"
                 fill
@@ -119,7 +120,7 @@ export default function HomePage() {
             <div style={{ display: "flex", flexWrap: "wrap", gap: 16, paddingTop: 8 }}>
               {treatmentTeasers.map((t) => (
                 <Link key={t.href} href={t.href} className="tile-link" data-reveal>
-                  <Image src={t.thumb} alt="" width={72} height={72} style={{ width: 72, height: 72, objectFit: "cover", borderRadius: 12, flex: "none" }} />
+                  <Image loading="eager" fetchPriority="low" src={t.thumb} alt="" width={72} height={72} style={{ width: 72, height: 72, objectFit: "cover", borderRadius: 12, flex: "none" }} />
                   <span className="stack">
                     <strong style={{ fontWeight: 600, fontSize: 19 }}>{t.name}</strong>
                     <span style={{ fontSize: 14, color: "var(--nuit-muted)" }}>{t.sub}</span>
@@ -151,7 +152,7 @@ export default function HomePage() {
         </div>
         <div className="min0" style={{ flex: "1 1 360px", display: "flex", justifyContent: "center" }}>
           <div className="media portrait" style={{ borderRadius: "210px 210px 28px 28px", maxWidth: 420 }} data-mask>
-            <Image src={practitioner.portrait.src} alt={practitioner.portrait.alt} fill sizes="420px" data-parallax="4" />
+            <Image loading="eager" fetchPriority="low" src={practitioner.portrait.src} alt={practitioner.portrait.alt} fill sizes="420px" data-parallax="4" />
           </div>
         </div>
       </section>

@@ -10,7 +10,7 @@ export function SiteFooter() {
       <div className="wrap stack" style={{ paddingTop: 72, paddingBottom: 32, gap: 48 }}>
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: 40 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 14, flex: "1 1 260px" }}>
-            <Image src="/images/logo-blanc.png" alt="" width={33} height={64} style={{ height: 64, width: "auto" }} />
+            <Image loading="eager" fetchPriority="low" src="/images/logo-blanc.png" alt="" width={33} height={64} style={{ height: 64, width: "auto" }} />
             <span className="stack" style={{ lineHeight: 1.2 }}>
               <span style={{ fontWeight: 600, fontSize: 24 }}>{business.name}</span>
               <span style={{ fontSize: 14, color: "var(--nuit-muted)" }}>

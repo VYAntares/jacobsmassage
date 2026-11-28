@@ -37,12 +37,12 @@ export default function CabinetPage() {
       <section className="wrap" style={{ paddingBottom: "var(--s-96)" }}>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 20 }}>
           <div className="media r-card gallery-main min0" style={{ flex: "2 1 520px" }} data-mask>
-            <Image src={cabinetGallery.main.src} alt={cabinetGallery.main.alt} fill priority sizes="(max-width: 960px) 100vw, 800px" data-parallax="3" />
+            <Image src={cabinetGallery.main.src} alt={cabinetGallery.main.alt} fill priority fetchPriority="high" sizes="(max-width: 960px) 100vw, 800px" data-parallax="3" />
           </div>
           <div className="stack min0" style={{ flex: "1 1 280px", gap: 20 }}>
             {cabinetGallery.side.map((img) => (
               <div key={img.src} className="media r-card gallery-side" data-mask>
-                <Image src={img.src} alt={img.alt} fill sizes="(max-width: 960px) 100vw, 400px" />
+                <Image loading="eager" fetchPriority="low" src={img.src} alt={img.alt} fill sizes="(max-width: 960px) 100vw, 400px" />
               </div>
             ))}
           </div>
@@ -68,7 +68,7 @@ export default function CabinetPage() {
         <div className="wrap section split">
           <div className="min0" style={{ flex: "1 1 360px", display: "flex", justifyContent: "center" }}>
             <div className="media portrait-lg" style={{ borderRadius: "220px 220px 28px 28px", maxWidth: 440 }} data-mask>
-              <Image src={practitioner.portrait.src} alt={practitioner.portrait.altNotes} fill sizes="440px" data-parallax="4" />
+              <Image loading="eager" fetchPriority="low" src={practitioner.portrait.src} alt={practitioner.portrait.altNotes} fill sizes="440px" data-parallax="4" />
             </div>
           </div>
           <div className="stack min0" style={{ flex: "1 1 480px", gap: 24 }}>
