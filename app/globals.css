@@ -165,11 +165,8 @@ p { margin: 0; }
 @media (max-width: 768px) {
   .hero-video { min-height: calc(100svh - 73px); }
   .hero-video__inner { padding-top: 72px; padding-bottom: 32px; }
-  /* Mobile: text block up top, buttons + facts stay at the bottom */
-  .hero-video__inner { justify-content: flex-start; padding-top: 36px; }
-  .hero-video__bottom { display: contents; }
-  .hero-video__lead { margin-top: 20px; }
-  .hero-video__bottom > div { margin-top: auto; padding-top: 28px; }
+  /* Mobile: whole hero content centred vertically on the video */
+  .hero-video__inner { justify-content: center; padding-top: 40px; padding-bottom: 40px; }
   .hero-video__veil { background: linear-gradient(180deg, rgba(11,42,54,0.45) 0%, rgba(11,42,54,0.4) 40%, rgba(11,42,54,0.9) 100%); }
   .hero-video__lead { font-size: 17px; }
   .hero-video__bottom { margin-top: 24px; }
