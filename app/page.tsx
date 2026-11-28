@@ -21,6 +21,7 @@ export default function HomePage() {
         <HeroVideo />
         <div className="hero-video__veil" aria-hidden="true" />
         <div className="wrap hero-video__inner">
+          <div className="hero-video__top">
           <Dots breath sizes={[10, 14, 10]} gap={8} className="hero-video__dots" />
           <p className="hero-video__eyebrow" data-hero-item>
             Massothérapie à {business.address.city}, {business.address.nearby}
@@ -28,6 +29,8 @@ export default function HomePage() {
           <h1 className="h-display hero-video__title" data-hero-item>
             Relâcher le corps, apaiser l&apos;esprit.
           </h1>
+          </div>
+          <div className="hero-video__foot">
           <div className="hero-video__bottom">
             <p className="hero-video__lead" data-hero-item>
               Massage classique et réflexologie dans un cabinet simple et chaleureux. Chaque séance est unique, adaptée
@@ -47,6 +50,7 @@ export default function HomePage() {
               <strong>{business.address.streetShort}, {business.address.city}</strong>
             </div>
             <div><span>{priceSummary.sessionLabel}</span><strong>{priceSummary.session}</strong></div>
+          </div>
           </div>
         </div>
       </section>
